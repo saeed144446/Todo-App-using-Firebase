@@ -49,7 +49,7 @@ public class AddNotes {
         this.priority = priority;
     }
 
-    public String uriImage() {
+    public String getUriImage() {
         return uriImage;
     }
     public void setUriImage(String uriImage) {

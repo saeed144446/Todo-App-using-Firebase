@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.userauth.Activies.AddNoteAct;
 import com.example.userauth.R;
 import com.example.userauth.model.AddNotes;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHolder> {
     private Context context;
@@ -46,6 +49,11 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
         holder.priority_text.setText( currentNote.getPriority());
        // holder.uri_text.setText(currentNote.uriImage());
 
+        Glide.with(context)
+                .load(currentNote.getUriImage())
+                .placeholder(R.drawable.ic_launcher_background)  // Placeholder image while loading
+                .error(R.drawable.ic_dialogerror)  // Error image if loading fails
+                .into(holder.imageView);
 
         holder.morevert.setOnClickListener(v -> {
             // Handle morevert button click
@@ -61,7 +69,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
                     intent.putExtra("priority", currentNote.getPriority());
                     intent.putExtra("key", currentNote.getKey());
                     intent.putExtra("isUpdate", true);
-                    intent.putExtra("uriImage", currentNote.uriImage());
+                    intent.putExtra("uriImage", currentNote.getUriImage());
                     context.startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.delete) {
                     // Log the key to make sure it's correct
@@ -85,6 +93,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
         private TextView priority_text;
         private ImageView morevert;
         private TextView uri_text;
+        private ImageView imageView;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +102,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
             morevert = itemView.findViewById(R.id.morebtn);
             priority_text = itemView.findViewById(R.id.priotryText);
             uri_text = itemView.findViewById(R.id.uritext);
+            imageView = itemView.findViewById(R.id.profile_image);
         }
     }
 
