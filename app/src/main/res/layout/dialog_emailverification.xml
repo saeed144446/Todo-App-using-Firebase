@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            android:background="@drawable/customedittext">
+
+            <TextView
+                style="@style/TitleText"
+                android:text="Alert"/>
+
+            <TextView
+                style="@style/LoginRedirectText"
+                android:text="@string/app_name"
+                android:id="@+id/emailtext"/>
+
+            <TextView
+                style="@style/LoginRedirectText"
+                android:id="@+id/loginRedirectText"
+                android:text="Please verify your email address first." />
+
+            <Button
+                style="@style/ButtonStyle"
+                android:id="@+id/ok_button"
+                android:text="Ok"
+                app:cornerRadius = "20dp"
+                />
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

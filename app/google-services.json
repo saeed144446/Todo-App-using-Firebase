@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1077741825848",
+    "firebase_url": "https://food-with-me.firebaseio.com",
+    "project_id": "food-with-me",
+    "storage_bucket": "food-with-me.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077741825848:android:35985be71a1e08afdedbcd",
+        "android_client_info": {
+          "package_name": "com.example.userauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077741825848-ooi3ponsls5t0h0b8tmka13cal1bdh5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm3xFpnqhaXrYYeN7mTLcRuRcmbAXilDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077741825848-ooi3ponsls5t0h0b8tmka13cal1bdh5e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1077741825848-8b03372e8r12be76si39oja651thllgv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.applux.PosterMaker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

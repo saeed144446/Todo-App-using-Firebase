@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">UserAuth</string>
+
+    <string name="email_updated_success">Email address is updated. Please sign in with new email!</string>
+    <string name="email_update_failed">Failed to update email!</string>
+    <string name="dialog_ok_button">Ok</string>
+
+    <string-array name="priority_array">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
+</resources>

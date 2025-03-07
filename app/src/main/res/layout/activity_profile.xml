@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activies.ProfileAct">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@color/slateblue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_backarrow"
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/toolbartext"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginRight="15dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/backbtn"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/settingbtn"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:foregroundGravity="right"
+            android:visibility="invisible"
+            android:src="@drawable/baseline_settings_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            android:background="@drawable/customedittext">
+
+            <TextView
+                style="@style/TitleText"
+                android:text="Update Profile"
+              android:textSize="20dp"/>
+            <Button
+                android:id="@+id/update_email_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:drawableLeft="@drawable/updateemailicon"
+                android:gravity="start|center_vertical"
+                android:text="Update Email"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/slateblue"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp" />
+
+            <Button
+                android:id="@+id/change_password_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:gravity="start|center_vertical"
+                android:text="Change Password"
+                android:backgroundTint="@color/slateblue"
+                android:textColor="@color/white"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp" />
+
+
+            <Button
+                style="@style/ButtonStyle"
+                android:id="@+id/profle_update_btn"
+                android:text="Update"
+                android:visibility="gone"
+                app:cornerRadius = "20dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:drawableLeft="@drawable/baseline_login_24"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/slateblue"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:id="@+id/logout_btn"
+                android:text="Log out" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
