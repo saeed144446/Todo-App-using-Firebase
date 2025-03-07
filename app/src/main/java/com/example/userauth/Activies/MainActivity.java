@@ -80,12 +80,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 notesArrayList.clear(); // Clear the list before adding new data
-
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     AddNotes note = snapshot.getValue(AddNotes.class);
-
                     if (note != null) {
+                        note.setKey(snapshot.getKey()); // Make sure key is set
                         notesArrayList.add(note);
+                        Log.d("Fetch", "Fetched note with key: " + snapshot.getKey());
                     }
                 }
 
@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     public int compare(AddNotes note1, AddNotes note2) {
                         // Define the priority order
                         String[] priorityOrder = {"High", "Medium", "Low"};
+                        // Get the index of each note's priority in the priorityOrder array
                         int index1 = -1;
                         int index2 = -1;
                         for (int i = 0; i < priorityOrder.length; i++) {
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
+                        // Compare based on the index (lower index means higher priority)
                         return Integer.compare(index1, index2);
                     }
                 });
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 adapter.notifyDataSetChanged(); // Notify the adapter that the data has changed
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -122,6 +125,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }

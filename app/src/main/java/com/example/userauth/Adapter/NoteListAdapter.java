@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.userauth.Activies.AddNoteAct;
 import com.example.userauth.R;
 import com.example.userauth.model.AddNotes;
@@ -45,8 +44,6 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
         holder.title_text.setText(currentNote.getTitle());
         holder.description_text.setText(currentNote.getDescription());
         holder.priority_text.setText( currentNote.getPriority());
-
-        Glide.with(holder.profile_image.getContext()).load(currentNote).into(holder.profile_image);
        // holder.uri_text.setText(currentNote.uriImage());
 
 
@@ -56,25 +53,26 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
             popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
             popupMenu.setOnMenuItemClickListener(menuItem -> {
                 if (menuItem.getItemId() == R.id.update) {
+                    // Update logic
                     notifyDataSetChanged();
                     Intent intent = new Intent(context, AddNoteAct.class);
                     intent.putExtra("title", currentNote.getTitle());
                     intent.putExtra("description", currentNote.getDescription());
-                    intent.putExtra("priority", currentNote.getPriority()); // Pass the priority
+                    intent.putExtra("priority", currentNote.getPriority());
                     intent.putExtra("key", currentNote.getKey());
                     intent.putExtra("isUpdate", true);
-                    intent.putExtra("uriImage", currentNote.getUriImage());
-
-
+                    intent.putExtra("uriImage", currentNote.uriImage());
                     context.startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.delete) {
-                    delete(currentNote.getKey());
+                    // Log the key to make sure it's correct
+                    Log.d("Delete", "Deleting note with key: " + currentNote.getKey());
+                    delete(currentNote.getKey()); // Pass key for deletion
                 }
-                Toast.makeText(context, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             });
             popupMenu.show();
         });
+
     }
 
     @Override
@@ -87,7 +85,6 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
         private TextView priority_text;
         private ImageView morevert;
         private TextView uri_text;
-        private ImageView profile_image;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,23 +92,30 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
             description_text = itemView.findViewById(R.id.description_text);
             morevert = itemView.findViewById(R.id.morebtn);
             priority_text = itemView.findViewById(R.id.priotryText);
-           // uri_text = itemView.findViewById(R.id.uritext);
-            profile_image = itemView.findViewById(R.id.profile_image);
+            uri_text = itemView.findViewById(R.id.uritext);
         }
     }
 
     private void delete(String key) {
+        // Check if the key is null before proceeding
+        if (key == null) {
+            Log.e("Delete", "Error: key is null");
+            Toast.makeText(context, "Error: Unable to delete note, invalid key", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("AddNotes");
 
+        // Proceed to delete if the key is valid
         dbref.child(key).removeValue()
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(context, "Note deleted successfully", Toast.LENGTH_SHORT).show();
-                    // Optionally, refresh the data in your list by removing the note locally too
-                    // For example, by removing it from the `noteList` and calling `notifyDataSetChanged()`
-                    for (AddNotes note : noteList) {
-                        if (note.getKey().equals(key)) {
-                            noteList.remove(note);
-                            notifyDataSetChanged();
+
+                    // Optionally, remove it from the local list and notify the adapter
+                    for (int i = 0; i < noteList.size(); i++) {
+                        if (noteList.get(i).getKey().equals(key)) {
+                            noteList.remove(i);
+                            notifyItemRemoved(i);  // More efficient than notifyDataSetChanged()
                             break;
                         }
                     }
@@ -120,6 +124,5 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.viewHo
                     Toast.makeText(context, "Failed to delete note", Toast.LENGTH_SHORT).show();
                 });
     }
-
 
 }

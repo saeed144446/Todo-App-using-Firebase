@@ -156,16 +156,18 @@ public class AddNoteAct extends AppCompatActivity {
     }
 
     private void updateDataToFirebase(String title, String description, String priority, String uri) {
+        // Ensure you're using the correct noteKey for updating the note.
         addNotes.setTitle(title);
         addNotes.setDescription(description);
-        addNotes.setPriority(priority);  // Ensure priority is being set
+        addNotes.setPriority(priority);
         addNotes.setUriImage(uri);
 
+        // Ensure you're using the right reference in the database
         databaseReference.child(noteKey).setValue(addNotes)
                 .addOnSuccessListener(aVoid -> {
                     progressDialog.dismiss();
                     Toast.makeText(AddNoteAct.this, "Data updated successfully!", Toast.LENGTH_SHORT).show();
-                    finish();
+                    finish();  // Finish and return to the previous screen
                 })
                 .addOnFailureListener(error -> {
                     progressDialog.dismiss();
